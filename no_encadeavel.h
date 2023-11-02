@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 /*
     Cada elemento desta lista possui dados sobre nº da linha e a companhia e um
     ponterio para uma lista com todas as paradas.
