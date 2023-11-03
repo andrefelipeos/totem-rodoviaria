@@ -59,15 +59,33 @@ void OpcoesDeManutencao()
     cout << "O que você deseja fazer?" << endl;
     cout << "  0. Encerrar manutenção do programa" << endl;
     cout << "  1. Adicionar uma linha de ônibus" << endl;
-    cout << "  2. Alterar uma linha de ônibus" << endl;
+    cout << "  2. Mostrar todas as linhas de ônibus" << endl;
     cout << "  3. Remover uma linha de ônibus" << endl;
     cout << "  4. Adicionar uma parada em uma linha" << endl;
     cout << "  5. Alterar uma parada em uma linha" << endl;
     cout << "  6. Remover uma parada em uma linha" << endl;
 }
 
+bool AutenticaUsuario()
+{
+    string senha_do_usuario;
+    cout << "Senha para manutenção: ";
+    getline(cin >> ws, senha_do_usuario);
+    if (senha_do_usuario == SENHA_PARA_MANUTENCAO)
+    {
+        return true;
+    }
+    return false;
+}
+
 void RealizarManutencao()
 {
+    bool usuario_autenticado = AutenticaUsuario();
+    if (!usuario_autenticado)
+    {
+        return;
+    }
+
     int escolha = -1;
     do
     {
@@ -100,6 +118,11 @@ void RealizarManutencao()
 
 void RemoverLinha()
 {
+    if (linhas_de_onibus.EstaVazia)
+    {
+        cout << "A lista está vazia. Não há nós para remover." << endl;
+        return;
+    }
     unsigned numero_da_linha;
     cout << "Número da linha para ser removida: ";
     cin >> numero_da_linha;
