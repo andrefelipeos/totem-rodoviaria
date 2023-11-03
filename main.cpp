@@ -118,7 +118,7 @@ void RealizarManutencao()
 
 void RemoverLinha()
 {
-    if (linhas_de_onibus.EstaVazia)
+    if (linhas_de_onibus.EstaVazia())
     {
         cout << "A lista está vazia. Não há nós para remover." << endl;
         return;

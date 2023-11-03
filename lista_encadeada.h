@@ -78,14 +78,14 @@ public:
 
     void ImprimeDadosFormatados() const
     {
-        NoEncadeavel *auxiliar = primeiro_no_;
-        while (auxiliar != nullptr)
+        NoEncadeavel *no_iterador = this->primeiro_no_;
+        while (no_iterador != nullptr)
         {
             std::cout << "-----\n";
-            std::cout << "Linha: " << auxiliar->numero_da_linha << "\n";
-            std::cout << "Companhia: " << auxiliar->nome_da_companhia << "\n";
+            std::cout << "Linha: " << no_iterador->numero_da_linha << "\n";
+            std::cout << "Companhia: " << no_iterador->nome_da_companhia << "\n";
             std::cout << '\n';
-            auxiliar = auxiliar->proximo_no;
+            no_iterador = no_iterador->proximo_no;
         }
     }
 
@@ -102,6 +102,7 @@ public:
             delete this->primeiro_no_;
             this->primeiro_no_ = nullptr;
             this->ultimo_no_ = nullptr;
+            this->tamanho_--;
             return;
         }
 
@@ -110,6 +111,7 @@ public:
             NoEncadeavel *no_para_remover = this->primeiro_no_;
             this->primeiro_no_ = primeiro_no_->proximo_no;
             delete no_para_remover;
+            this->tamanho_--;
             return;
         }
 
@@ -133,6 +135,7 @@ public:
         NoEncadeavel *linha_a_ser_removida = no_iterador->proximo_no;
         no_iterador->proximo_no = linha_a_ser_removida->proximo_no;
         delete linha_a_ser_removida;
+        this->tamanho_--;
     }
 
     void EsvaziarLista()
@@ -149,11 +152,6 @@ public:
     bool EstaVazia() const
     {
         return tamanho_ == 0;
-    }
-
-    unsigned RecuperaTamanho() const
-    {
-        return tamanho_;
     }
 
     ~ListaEncadeada()
