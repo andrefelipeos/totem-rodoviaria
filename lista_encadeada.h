@@ -27,37 +27,52 @@ public:
     {
         if (this->EstaVazia())
         {
-            this->InsereLinhaNoInicio(numero, companhia);
-            this->ultimo_no_ = this->primeiro_no_;
+            cout << "Inserindo " << numero << " numa lista vazia." << endl;
+            NoEncadeavel *nova_linha = new NoEncadeavel(numero, companhia);
+            this->primeiro_no_ = nova_linha;
+            this->ultimo_no_ = nova_linha;
+            this->tamanho_++;
+            return;
         }
-        else
+
+        if (numero < this->primeiro_no_->numero_da_linha)
         {
-            if (numero < this->primeiro_no_->numero_da_linha)
-            {
-                this->InsereLinhaNoInicio(numero, companhia);
-            }
-            else if (numero > this->ultimo_no_->numero_da_linha)
-            {
-                this->InsereLinhaNoFinal(numero, companhia);
-            }
-            else
-            {
-                // Tem que iterar na lista para inserir no local correto!
-                NoEncadeavel *no_iterador = this->primeiro_no_;
-                while (numero < no_iterador->numero_da_linha)
-                {
-                    no_iterador = no_iterador->proximo_no;
-                }
-                if (numero == no_iterador->numero_da_linha)
-                {
-                    cout << "Número da linha inválido: os números das linhas de ônibus devem ser únicos em todo o país." << endl;
-                    return;
-                }
-                NoEncadeavel *novo_no = new NoEncadeavel(numero, companhia, no_iterador->proximo_no);
-                no_iterador->proximo_no = novo_no;
-                this->tamanho_++;
-            }
+            cout << "Inserindo " << numero << " no início da lista." << endl;
+            NoEncadeavel *nova_linha = new NoEncadeavel(numero, companhia, this->primeiro_no_);
+            this->primeiro_no_ = nova_linha;
+            this->tamanho_++;
+            return;
         }
+
+        if (numero > this->ultimo_no_->numero_da_linha)
+        {
+            cout << "Inserindo " << numero << " no final da lista." << endl;
+            NoEncadeavel *nova_linha = new NoEncadeavel(numero, companhia);
+            this->ultimo_no_->proximo_no = nova_linha;
+            this->ultimo_no_ = nova_linha;
+            this->tamanho_++;
+            return;
+        }
+
+        NoEncadeavel *no_iterador = this->primeiro_no_;
+        while (numero > no_iterador->proximo_no->numero_da_linha)
+        {
+            cout << numero << " é maior que " << no_iterador->proximo_no->numero_da_linha << endl;
+            no_iterador = no_iterador->proximo_no;
+        }
+
+        cout << numero << " é menor ou igual a " << no_iterador->proximo_no->numero_da_linha << endl;
+        cout << "Inserindo " << numero << " entre " << no_iterador->numero_da_linha << " e " << no_iterador->proximo_no->numero_da_linha << endl;
+
+        if (no_iterador->numero_da_linha == numero)
+        {
+            cout << "Número da linha inválido: os números das linhas de ônibus devem ser únicos em todo o país." << endl;
+            return;
+        }
+
+        NoEncadeavel *nova_linha = new NoEncadeavel(numero, companhia, no_iterador->proximo_no);
+        no_iterador->proximo_no = nova_linha;
+        this->tamanho_++;
     }
 
     void InsereLinhaNoFinal(unsigned numero, string companhia)
