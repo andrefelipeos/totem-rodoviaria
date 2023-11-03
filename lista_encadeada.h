@@ -75,22 +75,6 @@ public:
         this->tamanho_++;
     }
 
-    void InsereLinhaNoFinal(unsigned numero, string companhia)
-    {
-        NoEncadeavel *novo_no_final = new NoEncadeavel(numero, companhia);
-        this->ultimo_no_->proximo_no = novo_no_final;
-        this->ultimo_no_ = novo_no_final;
-        this->tamanho_++;
-    }
-
-    void InsereLinhaNoInicio(unsigned numero, string companhia)
-    {
-        NoEncadeavel *novo_no_inicial = new NoEncadeavel(numero, companhia);
-        novo_no_inicial->proximo_no = primeiro_no_;
-        this->primeiro_no_ = novo_no_inicial;
-        this->tamanho_++;
-    }
-
     void ImprimeDadosFormatados() const
     {
         NoEncadeavel *no_iterador = this->primeiro_no_;
