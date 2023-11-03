@@ -7,9 +7,11 @@ using namespace std;
 
 const char *SENHA_PARA_MANUTENCAO = "senhafraca";
 
+void MostrarTodasAsLinhas();
 void OpcoesDeManutencao();
 void RealizarManutencao();
 void ProcurarLinhaDeOnibus();
+void RemoverLinha();
 
 ListaEncadeada linhas_de_onibus;
 
@@ -42,6 +44,11 @@ int main()
     return 0;
 }
 
+void MostrarTodasAsLinhas()
+{
+    linhas_de_onibus.ImprimeDadosFormatados();
+}
+
 void ProcurarLinhaDeOnibus()
 {
     cout << "Essa função ainda não foi implementada..." << endl;
@@ -70,7 +77,7 @@ void RealizarManutencao()
         {
         case 1:
         {
-            int numero;
+            unsigned numero;
             string companhia;
             cout << "Número da linha: ";
             cin >> numero;
@@ -80,13 +87,21 @@ void RealizarManutencao()
             break;
         }
         case 2:
-            /* alterar linha */
+            MostrarTodasAsLinhas();
             break;
         case 3:
-            /* remover linha */
+            RemoverLinha();
             break;
         default:
             break;
         }
     } while (escolha != 0);
+}
+
+void RemoverLinha()
+{
+    unsigned numero_da_linha;
+    cout << "Número da linha para ser removida: ";
+    cin >> numero_da_linha;
+    linhas_de_onibus.RemoveLinhaPeloNumero(numero_da_linha);
 }
