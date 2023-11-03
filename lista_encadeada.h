@@ -156,7 +156,6 @@ public:
     ~ListaEncadeada()
     {
         EsvaziarLista();
-        delete primeiro_no_;
     }
 };
 
