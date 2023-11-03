@@ -96,21 +96,16 @@ public:
             return;
         }
 
-        if (this->tamanho_ == 1)
-        {
-            delete this->primeiro_no_;
-            this->primeiro_no_ = nullptr;
-            this->ultimo_no_ = nullptr;
-            this->tamanho_--;
-            return;
-        }
-
         if (this->primeiro_no_->numero_da_linha == numero_da_linha_para_remover)
         {
             NoEncadeavel *no_para_remover = this->primeiro_no_;
             this->primeiro_no_ = primeiro_no_->proximo_no;
             delete no_para_remover;
             this->tamanho_--;
+            if (this->EstaVazia())
+            {
+                this->ultimo_no_ = nullptr;
+            }
             return;
         }
 
