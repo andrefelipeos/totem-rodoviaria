@@ -89,6 +89,53 @@ public:
         }
     }
 
+    void RemoveLinhaPeloNumero(unsigned numero_da_linha_a_ser_removida)
+    {
+        if (this->EstaVazia())
+        {
+            cout << "A lista está vazia. Não há nós para remover.";
+        }
+        else
+        {
+            if (this->tamanho_ == 1)
+            {
+                delete this->primeiro_no_;
+                this->primeiro_no_ = nullptr;
+                this->ultimo_no_ = nullptr;
+            }
+            else if (this->primeiro_no_->numero_da_linha == numero_da_linha_a_ser_removida)
+            {
+                this->RemovePrimeiraLinha();
+            }
+            else if (this->ultimo_no_->numero_da_linha == numero_da_linha_a_ser_removida)
+            {
+                //this.RemoveUltimaLinha();
+            }
+            else
+            {
+                // remover um nó intermediário: precisa iterar
+                NoEncadeavel *no_iterador = this->primeiro_no_;
+                while (no_iterador->proximo_no != nullptr && numero_da_linha_a_ser_removida != no_iterador->proximo_no->numero_da_linha)
+                {
+                    no_iterador = no_iterador->proximo_no;
+                }
+                if (no_iterador == nullptr)
+                {
+                    // Não há uma linha com o número dado.
+                    cout << "A linha " << numero_da_linha_a_ser_removida << " não existe. Nenhuma linha foi removida." << endl;
+                }
+                else
+                {
+                    // A próxima linha deve ser removida.
+                    NoEncadeavel *linha_a_ser_removida = no_iterador->proximo_no;
+                    no_iterador->proximo_no = linha_a_ser_removida->proximo_no;
+                    delete linha_a_ser_removida;
+                }
+            }
+            this->tamanho_--;
+        }
+    }
+
     void RemovePrimeiraLinha()
     {
         if (this->tamanho_ > 0)
