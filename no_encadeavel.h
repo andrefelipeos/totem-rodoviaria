@@ -20,7 +20,7 @@ struct NoEncadeavel
     NoEncadeavel(unsigned numero_da_linha, string nome_da_companhia, NoEncadeavel *proximo_no = nullptr)
     {
         this->numero_da_linha = numero_da_linha;
-        this->numero_da_linha = numero_da_linha;
+        this->nome_da_companhia = nome_da_companhia;
         this->proximo_no = proximo_no;
     }
 
