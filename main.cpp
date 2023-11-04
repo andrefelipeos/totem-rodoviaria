@@ -14,6 +14,7 @@ void OpcoesDeManutencao();
 void RealizarManutencao();
 void ProcurarLinhaDeOnibus();
 void RemoverLinha();
+void RemoverParada();
 
 ListaEncadeada linhas_de_onibus;
 
@@ -115,6 +116,9 @@ void RealizarManutencao()
         case 4:
             AdicionarParada();
             break;
+        case 6:
+            RemoverParada();
+            break;
         default:
             break;
         }
@@ -179,4 +183,36 @@ void RemoverLinha()
     cout << "Número da linha para ser removida: ";
     cin >> numero_da_linha;
     linhas_de_onibus.RemoveLinhaPeloNumero(numero_da_linha);
+}
+
+void RemoverParada()
+{
+    cout << "De qual linha você quer remover uma parada?" << endl;
+    cout << "Número da linha: ";
+    unsigned numero_da_linha;
+    cin >> numero_da_linha;
+    NoEncadeavel *linha = linhas_de_onibus.BuscaLinhaPeloNumero(numero_da_linha);
+    if (linha == nullptr)
+    {
+        cout << "Indique uma linha cadastrada." << endl;
+        return;
+    }
+    if (linha->paradas->EstaVazia())
+    {
+        cout << "A lista de paradas da linha " << linha->numero_da_linha
+             << " - " << linha->nome_da_companhia
+             << " está vazia. Não há paradas para remover." << endl;
+        return;
+    }
+    linha->paradas->ImprimeParadasNumeradas();
+    cout << "Qual parada você quer remover?" << endl;
+    cout << "Índice da parada: ";
+    unsigned indice_da_parada;
+    cin >> indice_da_parada;
+    if (indice_da_parada > linha->paradas->RecuperaTamanho() || indice_anterior < 1)
+    {
+        cout << "Índice inválido. Escolha uma parada entre " << linha->paradas->RecuperaTamanho() << " parada(s) existente(s)." << endl;
+        return;
+    }
+    linha->paradas->RemoveParadaPeloIndice(indice_da_parada);
 }
