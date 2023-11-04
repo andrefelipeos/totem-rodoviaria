@@ -1,6 +1,8 @@
 #ifndef NO_ENCADEAVEL_H
 #define NO_ENCADEAVEL_H
 
+#include "lista_duplamente_encadeada_circular.h"
+
 #include <iostream>
 #include <string>
 
@@ -15,7 +17,8 @@ struct NoEncadeavel
 {
     unsigned numero_da_linha;
     string nome_da_companhia;
-    NoEncadeavel * proximo_no;
+    NoEncadeavel *proximo_no;
+    ListaDuplamenteEncadeadaCircular *paradas;
 
     NoEncadeavel(unsigned numero_da_linha, string nome_da_companhia, NoEncadeavel *proximo_no = nullptr)
     {
