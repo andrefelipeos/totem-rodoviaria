@@ -94,6 +94,31 @@ public:
         return this->tamanho_;
     }
 
+    void RemoveParadaPeloIndice(unsigned indice)
+    {
+        if (indice < 1 || indice > this->tamanho_)
+        {
+            cout << "Índice de parada fora do intervalo de paradas." << endl;
+            return;
+        }
+        NoDuplamenteEncadeavel *no_iterador = this->no_sentinela_;
+        unsigned counter = 1;
+        while (counter < indice)
+        {
+            no_iterador = no_iterador->proximo_no;
+            counter++;
+        }
+        no_iterador->proximo_no->no_anterior = no_iterador->no_anterior;
+        no_iterador->no_anterior->proximo_no = no_iterador->proximo_no;
+        this->no_sentinela_ = no_iterador->proximo_no;
+        if (this->tamanho_ == 1)
+        {
+            this->no_sentinela_ = nullptr;
+        }
+        delete no_iterador;
+        this->tamanho_--;
+    }
+
     ~ListaDuplamenteEncadeadaCircular()
     {
         EsvaziarLista();

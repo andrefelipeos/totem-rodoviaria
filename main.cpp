@@ -209,7 +209,7 @@ void RemoverParada()
     cout << "Índice da parada: ";
     unsigned indice_da_parada;
     cin >> indice_da_parada;
-    if (indice_da_parada > linha->paradas->RecuperaTamanho() || indice_anterior < 1)
+    if (indice_da_parada > linha->paradas->RecuperaTamanho() || indice_da_parada < 1)
     {
         cout << "Índice inválido. Escolha uma parada entre " << linha->paradas->RecuperaTamanho() << " parada(s) existente(s)." << endl;
         return;
