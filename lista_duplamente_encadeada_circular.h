@@ -57,6 +57,27 @@ public:
         this->tamanho_++;
     }
 
+    void AlteraParadaPeloIndice(unsigned indice, string nome, string chegada, string partida)
+    {
+        if (indice < 1 || indice > this->tamanho_)
+        {
+            cout << "Índice de parada fora do intervalo de paradas." << endl;
+            return;
+        }
+        NoDuplamenteEncadeavel *no_iterador = this->no_sentinela_;
+        unsigned counter = 1;
+        while (counter < indice)
+        {
+            no_iterador = no_iterador->proximo_no;
+            counter++;
+        }
+        no_iterador->nome_da_parada = nome;
+        no_iterador->horario_de_chegada = chegada;
+        no_iterador->horario_de_partida = partida;
+        cout << "Parada alterada para " << nome << " ("
+            << chegada << " - " << partida << ")." << endl;
+    }
+
     void ImprimeParadasNumeradas() const
     {
         NoDuplamenteEncadeavel *no_iterador = this->no_sentinela_;

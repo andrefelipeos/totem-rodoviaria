@@ -8,6 +8,8 @@ using namespace std;
 const char *SENHA_PARA_MANUTENCAO = "senhafraca";
 
 void AdicionarParada();
+void AlterarParada();
+bool AutenticaUsuario();
 NoDuplamenteEncadeavel *CriarNovaParada();
 void MostrarTodasAsLinhas();
 void OpcoesDeManutencao();
@@ -45,6 +47,47 @@ int main()
     linhas_de_onibus.ImprimeDadosFormatados();
 
     return 0;
+}
+
+void AlterarParada()
+{
+    cout << "De qual linha você quer alterar uma parada?" << endl;
+    cout << "Número da linha: ";
+    unsigned numero_da_linha;
+    cin >> numero_da_linha;
+    NoEncadeavel *linha = linhas_de_onibus.BuscaLinhaPeloNumero(numero_da_linha);
+    if (linha == nullptr)
+    {
+        cout << "Indique uma linha cadastrada." << endl;
+        return;
+    }
+    if (linha->paradas->EstaVazia())
+    {
+        cout << "A lista de paradas da linha " << linha->numero_da_linha
+             << " - " << linha->nome_da_companhia
+             << " está vazia. Não há paradas para alterar." << endl;
+        return;
+    }
+    linha->paradas->ImprimeParadasNumeradas();
+    cout << "Qual parada você quer alterar?" << endl;
+    cout << "Índice da parada: ";
+    unsigned indice_da_parada;
+    cin >> indice_da_parada;
+    if (indice_da_parada > linha->paradas->RecuperaTamanho() || indice_da_parada < 1)
+    {
+        cout << "Índice inválido. Escolha uma parada entre " << linha->paradas->RecuperaTamanho() << " parada(s) existente(s)." << endl;
+        return;
+    }
+    cout << "Novo nome da parada: ";
+    string novo_nome;
+    getline(cin >> ws, novo_nome);
+    cout << "Novo horário de chegada: ";
+    string novo_horario_de_chegada;
+    getline(cin >> ws, novo_horario_de_chegada);
+    cout << "Novo horário de partida: ";
+    string novo_horario_de_partida;
+    getline(cin >> ws, novo_horario_de_partida);
+    linha->paradas->AlteraParadaPeloIndice(indice_da_parada, novo_nome, novo_horario_de_chegada, novo_horario_de_partida);
 }
 
 void MostrarTodasAsLinhas()
@@ -115,6 +158,9 @@ void RealizarManutencao()
             break;
         case 4:
             AdicionarParada();
+            break;
+        case 5:
+            AlterarParada();
             break;
         case 6:
             RemoverParada();
