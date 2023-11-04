@@ -42,16 +42,17 @@ public:
             counter++;
         }
 
-        NoDuplamenteEncadeavel *nova_parada = new NoDuplamenteEncadeavel(nome_da_parada, horario_de_partida, horario_chegada);
+        NoDuplamenteEncadeavel *nova_parada = new NoDuplamenteEncadeavel(nome_da_parada, horario_chegada, horario_de_partida);
         nova_parada->no_anterior = no_iterador;
         nova_parada->proximo_no = no_iterador->proximo_no;
         no_iterador->proximo_no->no_anterior = nova_parada;
         no_iterador->proximo_no = nova_parada;
+        this->tamanho_++;
     }
 
     void AdicionaPrimeiraParada(string nome, string chegada, string partida)
     {
-        NoDuplamenteEncadeavel *primeira_parada = new NoDuplamenteEncadeavel(nome, partida, chegada);
+        NoDuplamenteEncadeavel *primeira_parada = new NoDuplamenteEncadeavel(nome, chegada, partida);
         primeira_parada->no_anterior = primeira_parada;
         primeira_parada->proximo_no = primeira_parada;
         this->no_sentinela_ = primeira_parada;
@@ -62,10 +63,10 @@ public:
     {
         NoDuplamenteEncadeavel *no_iterador = this->no_sentinela_;
         unsigned contador = 1;
-        while (no_iterador != nullptr)
+        while (contador <= this->tamanho_)
         {
             cout << "-----\n";
-            cout << "Parada " << contador++;
+            cout << "Parada " << contador++ << endl;
             cout << "Nome da parada: " << no_iterador->nome_da_parada << "\n";
             cout << "Horário de chegada: " << no_iterador->horario_de_chegada << "\n";
             cout << "Horário de partida: " << no_iterador->horario_de_partida << "\n";

@@ -120,12 +120,6 @@ void RealizarManutencao()
     } while (escolha != 0);
 }
 
-/*
-Incluir uma parada numa linha. Neste ponto o usuário deve dizer qual o número da
-linha onde quer incluir uma parada e receberá na tela uma lista numerada de todas as
-paradas existentes nesta lista. Em seguida ele digita o número da parada após a qual
-ele quer inserir uma parada e inserirá a parada.
-*/
 void AdicionarParada()
 {
     cout << "Número da linha em que a parada será inserida: ";
@@ -137,35 +131,41 @@ void AdicionarParada()
         cout << "Indique uma linha cadastrada." << endl;
         return;
     }
-    // SE A LISTAR ESTIVER VAZIA, ADICIONAR PRIMEIRO NÓ
-    // SENÃO (SE A LISTA NÃO ESTIVER VAZIA), ADICIONAR APÓS UM ÍNDICE/PARADA
-    cout << "Número da linha -> " << linha->numero_da_linha << endl;
-    cout << "Nome da companhia -> " << linha->nome_da_companhia << endl;
     if (linha->paradas->EstaVazia())
     {
         cout << "A lista de paradas está vazia. Adicionando primeira parada." << endl;
         string nome_da_parada;
         string horario_de_chegada;
         string horario_de_partida;
-        cout << "Nome da nova parada: " << endl;
+        cout << "Nome da nova parada: ";
         getline(cin >> ws, nome_da_parada);
-        cout << "Horário de chegada: " << endl;
+        cout << "Horário de chegada: ";
         getline(cin >> ws, horario_de_chegada);
-        cout << "Horário de partida: " << endl;
+        cout << "Horário de partida: ";
         getline(cin >> ws, horario_de_partida);
         linha->paradas->AdicionaPrimeiraParada(nome_da_parada, horario_de_chegada, horario_de_partida);
     }
     else
     {
         linha->paradas->ImprimeParadasNumeradas();
-        cout << "Após qual parada você deseja adicionar a nova parada? " << endl;
+        cout << "Após qual parada você deseja adicionar a nova parada? ";
         unsigned indice_anterior;
         cin >> indice_anterior;
-        if (indice_anterior > linha->paradas->RecuperaTamanho())
+        if (indice_anterior > linha->paradas->RecuperaTamanho() || indice_anterior < 1)
         {
-            cout << "Existem apenas " << linha->paradas->RecuperaTamanho() << "." << endl;
+            cout << "Índice inválido. Escolha uma parada entre " << linha->paradas->RecuperaTamanho() << " parada(s) existente(s)." << endl;
             return;
         }
+        string nome_da_parada;
+        string horario_de_chegada;
+        string horario_de_partida;
+        cout << "Nome da nova parada: ";
+        getline(cin >> ws, nome_da_parada);
+        cout << "Horário de chegada: ";
+        getline(cin >> ws, horario_de_chegada);
+        cout << "Horário de partida: ";
+        getline(cin >> ws, horario_de_partida);
+        linha->paradas->AdicionaParadaAposIndice(indice_anterior, nome_da_parada, horario_de_chegada, horario_de_partida);
     }
 }
 
