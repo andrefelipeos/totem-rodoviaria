@@ -28,7 +28,9 @@ struct NoDuplamenteEncadeavel
 
     ~NoDuplamenteEncadeavel()
     {
-        std::cout << "Excluindo a parada " << this->nome_da_parada << "\n";
+            cout << "Excluindo a parada " << nome_da_parada
+                << " (" << horario_de_chegada << " - "
+                << horario_de_partida << ")." << endl;
     }
 };
 

@@ -29,7 +29,9 @@ struct NoEncadeavel
 
     ~NoEncadeavel()
     {
-        std::cout << "Excluindo a linha " << this->numero_da_linha << " - " << this->nome_da_companhia << "\n";
+        cout << "Excluindo paradas da linha " << numero_da_linha << " - " << nome_da_companhia << endl;
+        delete paradas;
+        cout << "Excluindo a linha " << numero_da_linha << " - " << nome_da_companhia << endl;
     }
 };
 
