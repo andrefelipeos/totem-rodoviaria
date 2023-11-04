@@ -131,38 +131,42 @@ void AdicionarParada()
     cout << "Número da linha em que a parada será inserida: ";
     unsigned numero_da_linha;
     cin >> numero_da_linha;
-    // buscar uma linha pelo número, e acessar sua lista de paradas
     NoEncadeavel *linha = linhas_de_onibus.BuscaLinhaPeloNumero(numero_da_linha);
     if (linha == nullptr)
     {
         cout << "Indique uma linha cadastrada." << endl;
         return;
     }
-    //cout << "Linha: " << linha->numero_da_linha << endl;
-    //cout << "Companhia: " << linha->nome_da_companhia << endl;
-    linha->paradas->ImprimeParadasNumeradas();
-    // Em seguida ele digita o número da parada após a qual ele quer inserir
-    // uma parada e inserirá a parada.
-    cout << "Após qual parada você deseja adicionar a nova parada? " << endl;
-    //cout << "Digite 0 para inserir a nova parada no início da lista." << endl;
-    cout << "Índice anterior: ";
-    unsigned indice_anterior;
-    cin >> indice_anterior;
-    if (indice_anterior > linha->paradas->RecuperaTamanho())
+    // SE A LISTAR ESTIVER VAZIA, ADICIONAR PRIMEIRO NÓ
+    // SENÃO (SE A LISTA NÃO ESTIVER VAZIA), ADICIONAR APÓS UM ÍNDICE/PARADA
+    cout << "Número da linha -> " << linha->numero_da_linha << endl;
+    cout << "Nome da companhia -> " << linha->nome_da_companhia << endl;
+    if (linha->paradas->EstaVazia())
     {
-        cout << "Existem apenas " << linha->paradas->RecuperaTamanho() << "." << endl;
-        return;
+        cout << "A lista de paradas está vazia. Adicionando primeira parada." << endl;
+        string nome_da_parada;
+        string horario_de_chegada;
+        string horario_de_partida;
+        cout << "Nome da nova parada: " << endl;
+        getline(cin >> ws, nome_da_parada);
+        cout << "Horário de chegada: " << endl;
+        getline(cin >> ws, horario_de_chegada);
+        cout << "Horário de partida: " << endl;
+        getline(cin >> ws, horario_de_partida);
+        linha->paradas->AdicionaPrimeiraParada(nome_da_parada, horario_de_chegada, horario_de_partida);
     }
-    string nome_da_parada;
-    string horario_de_chegada;
-    string horario_de_partida;
-    cout << "Nome da nova parada: " << endl;
-    getline(cin >> ws, nome_da_parada);
-    cout << "Horário de chegada: " << endl;
-    getline(cin >> ws, horario_de_chegada);
-    cout << "Horário de partida: " << endl;
-    getline(cin >> ws, horario_de_partida);
-    linha->paradas->AdicionaParadaAposIndice(indice_anterior, nome_da_parada, horario_de_chegada, horario_de_partida);
+    else
+    {
+        linha->paradas->ImprimeParadasNumeradas();
+        cout << "Após qual parada você deseja adicionar a nova parada? " << endl;
+        unsigned indice_anterior;
+        cin >> indice_anterior;
+        if (indice_anterior > linha->paradas->RecuperaTamanho())
+        {
+            cout << "Existem apenas " << linha->paradas->RecuperaTamanho() << "." << endl;
+            return;
+        }
+    }
 }
 
 void RemoverLinha()

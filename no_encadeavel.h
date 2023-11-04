@@ -18,7 +18,7 @@ struct NoEncadeavel
     unsigned numero_da_linha;
     string nome_da_companhia;
     NoEncadeavel *proximo_no;
-    ListaDuplamenteEncadeadaCircular *paradas;
+    ListaDuplamenteEncadeadaCircular *paradas = new ListaDuplamenteEncadeadaCircular();
 
     NoEncadeavel(unsigned numero_da_linha, string nome_da_companhia, NoEncadeavel *proximo_no = nullptr)
     {
