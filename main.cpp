@@ -8,6 +8,7 @@ using namespace std;
 const char *SENHA_PARA_MANUTENCAO = "senhafraca";
 
 void AdicionarParada();
+NoDuplamenteEncadeavel *CriarNovaParada();
 void MostrarTodasAsLinhas();
 void OpcoesDeManutencao();
 void RealizarManutencao();
@@ -134,16 +135,8 @@ void AdicionarParada()
     if (linha->paradas->EstaVazia())
     {
         cout << "A lista de paradas está vazia. Adicionando primeira parada." << endl;
-        string nome_da_parada;
-        string horario_de_chegada;
-        string horario_de_partida;
-        cout << "Nome da nova parada: ";
-        getline(cin >> ws, nome_da_parada);
-        cout << "Horário de chegada: ";
-        getline(cin >> ws, horario_de_chegada);
-        cout << "Horário de partida: ";
-        getline(cin >> ws, horario_de_partida);
-        linha->paradas->AdicionaPrimeiraParada(nome_da_parada, horario_de_chegada, horario_de_partida);
+        NoDuplamenteEncadeavel *nova_parada = CriarNovaParada();
+        linha->paradas->AdicionaPrimeiraParada(nova_parada);
     }
     else
     {
@@ -156,17 +149,23 @@ void AdicionarParada()
             cout << "Índice inválido. Escolha uma parada entre " << linha->paradas->RecuperaTamanho() << " parada(s) existente(s)." << endl;
             return;
         }
-        string nome_da_parada;
-        string horario_de_chegada;
-        string horario_de_partida;
-        cout << "Nome da nova parada: ";
-        getline(cin >> ws, nome_da_parada);
-        cout << "Horário de chegada: ";
-        getline(cin >> ws, horario_de_chegada);
-        cout << "Horário de partida: ";
-        getline(cin >> ws, horario_de_partida);
-        linha->paradas->AdicionaParadaAposIndice(indice_anterior, nome_da_parada, horario_de_chegada, horario_de_partida);
+        NoDuplamenteEncadeavel *nova_parada = CriarNovaParada();
+        linha->paradas->AdicionaParadaAposIndice(indice_anterior, nova_parada);
     }
+}
+
+NoDuplamenteEncadeavel *CriarNovaParada()
+{
+    string nome_da_parada;
+    string horario_de_chegada;
+    string horario_de_partida;
+    cout << "Nome da nova parada: ";
+    getline(cin >> ws, nome_da_parada);
+    cout << "Horário de chegada: ";
+    getline(cin >> ws, horario_de_chegada);
+    cout << "Horário de partida: ";
+    getline(cin >> ws, horario_de_partida);
+    return new NoDuplamenteEncadeavel(nome_da_parada, horario_de_chegada, horario_de_partida);
 }
 
 void RemoverLinha()

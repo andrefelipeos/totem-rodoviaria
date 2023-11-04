@@ -26,7 +26,7 @@ public:
     Incluir uma parada numa linha. (...) o usuário (...) digita o número da
     parada após a qual ele quer inserir uma parada (...).
     */
-    void AdicionaParadaAposIndice(unsigned indice_anterior, string nome_da_parada, string horario_chegada, string horario_de_partida)
+    void AdicionaParadaAposIndice(unsigned indice_anterior, NoDuplamenteEncadeavel *nova_parada)
     {
         if (indice_anterior > this->tamanho_)
         {
@@ -42,7 +42,6 @@ public:
             counter++;
         }
 
-        NoDuplamenteEncadeavel *nova_parada = new NoDuplamenteEncadeavel(nome_da_parada, horario_chegada, horario_de_partida);
         nova_parada->no_anterior = no_iterador;
         nova_parada->proximo_no = no_iterador->proximo_no;
         no_iterador->proximo_no->no_anterior = nova_parada;
@@ -50,9 +49,8 @@ public:
         this->tamanho_++;
     }
 
-    void AdicionaPrimeiraParada(string nome, string chegada, string partida)
+    void AdicionaPrimeiraParada(NoDuplamenteEncadeavel *primeira_parada)
     {
-        NoDuplamenteEncadeavel *primeira_parada = new NoDuplamenteEncadeavel(nome, chegada, partida);
         primeira_parada->no_anterior = primeira_parada;
         primeira_parada->proximo_no = primeira_parada;
         this->no_sentinela_ = primeira_parada;
