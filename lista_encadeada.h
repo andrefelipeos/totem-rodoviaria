@@ -75,6 +75,23 @@ public:
         this->tamanho_++;
     }
 
+    NoEncadeavel *BuscaLinhaPeloNumero(unsigned numero)
+    {
+        NoEncadeavel *no_interador = this->primeiro_no_;
+        while (no_interador != nullptr && numero > no_interador->numero_da_linha)
+        {
+            no_interador = no_interador->proximo_no;
+        }
+
+        if (no_interador == nullptr || no_interador->numero_da_linha != numero)
+        {
+            cout << "Linha número " << numero << " não cadastrada." << endl;
+            return nullptr;
+        }
+
+        return no_interador;
+    }
+
     void ImprimeDadosFormatados() const
     {
         NoEncadeavel *no_iterador = this->primeiro_no_;
