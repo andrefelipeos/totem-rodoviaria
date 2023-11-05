@@ -150,6 +150,21 @@ NoDuplamenteEncadeavel *CriarNovaParada()
     return new NoDuplamenteEncadeavel(nome_da_parada, horario_de_chegada, horario_de_partida);
 }
 
+void ListarParadas()
+{
+    cout << "Você que listar as paradas de qual linha?" << endl;
+    cout << "Número da linha: ";
+    unsigned numero_da_linha;
+    cin >> numero_da_linha;
+    NoEncadeavel *linha = linhas_de_onibus.BuscaLinhaPeloNumero(numero_da_linha);
+    if (linha == nullptr)
+    {
+        cout << "Indique uma linha cadastrada." << endl;
+        return;
+    }
+    linha->paradas->ImprimeParadasNumeradas();
+}
+
 void MostrarTodasAsLinhas()
 {
     linhas_de_onibus.ImprimeDadosFormatados();
@@ -165,6 +180,7 @@ void OpcoesDeManutencao()
     cout << "  4. Adicionar uma parada em uma linha" << endl;
     cout << "  5. Alterar uma parada em uma linha" << endl;
     cout << "  6. Remover uma parada em uma linha" << endl;
+    cout << "  7. Listar paradas de uma linha" << endl;
 }
 
 void ProcurarLinhaDeOnibus()
@@ -205,6 +221,8 @@ void RealizarManutencao()
         case 6:
             RemoverParada();
             break;
+        case 7:
+            ListarParadas();
         default:
             break;
         }
