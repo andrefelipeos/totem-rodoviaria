@@ -7,6 +7,7 @@ using namespace std;
 
 const char *SENHA_PARA_MANUTENCAO = "senhafraca";
 
+void AdicionarLinha();
 void AdicionarParada();
 void AlterarParada();
 bool AutenticaUsuario();
@@ -140,16 +141,8 @@ void RealizarManutencao()
         switch (escolha)
         {
         case 1:
-        {
-            unsigned numero;
-            string companhia;
-            cout << "Número da linha: ";
-            cin >> numero;
-            cout << "Nome da companhia: ";
-            getline(cin >> ws, companhia);
-            linhas_de_onibus.AdicionaNovaLinhaOrdenadamente(numero, companhia);
+            AdicionarLinha();
             break;
-        }
         case 2:
             MostrarTodasAsLinhas();
             break;
@@ -169,6 +162,17 @@ void RealizarManutencao()
             break;
         }
     } while (escolha != 0);
+}
+
+void AdicionarLinha()
+{
+    unsigned numero;
+    string companhia;
+    cout << "Número da linha: ";
+    cin >> numero;
+    cout << "Nome da companhia: ";
+    getline(cin >> ws, companhia);
+    linhas_de_onibus.AdicionaNovaLinhaOrdenadamente(numero, companhia);
 }
 
 void AdicionarParada()
