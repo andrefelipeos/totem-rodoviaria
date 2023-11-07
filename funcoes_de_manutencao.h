@@ -8,6 +8,7 @@ void AdicionarParada();
 void AlterarParada();
 bool AutenticaUsuario();
 NoDuplamenteEncadeavel *CriarNovaParada();
+void IndicarParadaSentinela();
 void MostrarTodasAsLinhas();
 void OpcoesDeManutencao();
 void ProcurarLinhaDeOnibus();

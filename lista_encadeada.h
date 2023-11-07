@@ -27,7 +27,7 @@ public:
     {
         if (this->EstaVazia())
         {
-            cout << "Inserindo " << numero << " numa lista vazia." << endl;
+            cout << "Inserindo linha " << numero << " - " << companhia << " numa lista vazia." << endl;
             NoEncadeavel *nova_linha = new NoEncadeavel(numero, companhia);
             this->primeiro_no_ = nova_linha;
             this->ultimo_no_ = nova_linha;

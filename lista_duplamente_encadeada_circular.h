@@ -94,6 +94,23 @@ public:
         }
     }
 
+    void IndicarParadaSentinelaPeloIndice(unsigned indice_da_nova_parada_sentinela)
+    {
+        if (indice_da_nova_parada_sentinela < 1 || indice_da_nova_parada_sentinela > this->tamanho_)
+        {
+            cout << "Índice de parada fora do intervalo de paradas." << endl;
+            return;
+        }
+        NoDuplamenteEncadeavel *no_iterador = this->no_sentinela_;
+        unsigned counter = 1;
+        while (counter < indice_da_nova_parada_sentinela)
+        {
+            no_iterador = no_iterador->proximo_no;
+            counter++;
+        }
+        this->no_sentinela_ = no_iterador;
+    }
+
     bool EstaVazia() const
     {
         return tamanho_ == 0;

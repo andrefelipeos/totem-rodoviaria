@@ -150,6 +150,26 @@ NoDuplamenteEncadeavel *CriarNovaParada()
     return new NoDuplamenteEncadeavel(nome_da_parada, horario_de_chegada, horario_de_partida);
 }
 
+void IndicarParadaSentinela()
+{
+    cout << "De qual linha você deseja ajustar a parada 'sentinela'?" << endl;
+    cout << "Número da linha: ";
+    unsigned numero_da_linha;
+    cin >> numero_da_linha;
+    NoEncadeavel *linha = linhas_de_onibus.BuscaLinhaPeloNumero(numero_da_linha);
+    if (linha == nullptr)
+    {
+        cout << "Indique uma linha cadastrada." << endl;
+        return;
+    }
+    linha->paradas->ImprimeParadasNumeradas();
+    cout << "Qual parada será a nova 'sentinela'?" << endl;
+    cout << "Índice da parada: ";
+    unsigned indice_da_parada;
+    cin >> indice_da_parada;
+    linha->paradas->IndicarParadaSentinelaPeloIndice(indice_da_parada);
+}
+
 void ListarParadas()
 {
     cout << "Você que listar as paradas de qual linha?" << endl;
@@ -181,6 +201,7 @@ void OpcoesDeManutencao()
     cout << "  5. Alterar uma parada em uma linha" << endl;
     cout << "  6. Remover uma parada em uma linha" << endl;
     cout << "  7. Listar paradas de uma linha" << endl;
+    cout << "  8. Indicar parada 'sentinela' de uma linha" << endl;
 }
 
 void ProcurarLinhaDeOnibus()
@@ -223,6 +244,10 @@ void RealizarManutencao()
             break;
         case 7:
             ListarParadas();
+            break;
+        case 8:
+            IndicarParadaSentinela();
+            break;
         default:
             break;
         }
